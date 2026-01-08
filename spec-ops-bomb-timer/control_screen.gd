@@ -13,14 +13,10 @@ func _process(delta: float) -> void:
 	RawTimerNodeLabel.text = str(BombTimerNode.time_left)
 	FormattedTimerLabel.text = convert_timer_to_MMSS(BombTimerNode.time_left)
 
-func start_timer():
-	if BombTimerNode.is_stopped():
-		BombTimerNode.start()
-
 func Play_or_Pause_timer():
 	#is_stoppped returns true if timer hasn't been started yet
 	if BombTimerNode.is_stopped():
-		start_timer()
+		BombTimerNode.start()
 	else:
 		#toggle the bool "paused" if timer has already been started
 		BombTimerNode.paused = not BombTimerNode.paused
@@ -44,17 +40,16 @@ func adjust_timer():
 
 	# Ignore invalid input
 	if timeToAdd == 0.0 and amount_text.strip_edges() != "0":
-		Add_Subtract_Field.text = "NaN"
+		Add_Subtract_Field.text = "ENTER NUMBER"
 		return
 
 	var new_time = BombTimerNode.time_left + timeToAdd
 	new_time = max(new_time, 0.0)
 
-	#we'll want to return timer to paused state if it was already
+	#we'll want to return timer to paused state if it was paused
 	var was_paused = BombTimerNode.paused
 	BombTimerNode.stop()
 	BombTimerNode.start(new_time)
-	#return timer to paused if it was paused
 	BombTimerNode.paused = was_paused
 
 func createNewWindow():

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://wskk5sfavm4s"]
+
+[ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
+
+[node name="DisplayScreen" type="Window"]
+oversampling_override = 1.0
+size = Vector2i(500, 500)
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("1_b4k55")
+
+[node name="Label" type="Label" parent="Node2D"]
+offset_right = 113.0
+offset_bottom = 75.0
+text = "Display Screen
+
+"
+
+[node name="Bomb Timer Label" type="RichTextLabel" parent="Node2D"]
+offset_left = 42.0
+offset_top = 82.0
+offset_right = 158.0
+offset_bottom = 115.0

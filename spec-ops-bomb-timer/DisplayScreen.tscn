@@ -4,6 +4,7 @@
 
 [node name="DisplayScreen" type="Window"]
 oversampling_override = 1.0
+position = Vector2i(0, 36)
 size = Vector2i(500, 500)
 
 [node name="Node2D" type="Node2D" parent="."]

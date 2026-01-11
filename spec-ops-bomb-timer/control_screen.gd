@@ -55,3 +55,18 @@ func adjust_timer():
 func createNewWindow():
 	var newWindow = DisplayScreen.instantiate()
 	get_tree().root.add_child(newWindow)
+
+func adjust_field_by_one(mode: String): 
+	var text = Add_Subtract_Field.text.strip_edges()
+	text = text.to_int()
+
+	# Ignore invalid input
+	if text == 0 and text.strip_edges() != "0":
+		Add_Subtract_Field.text = "ENTER NUMBER"
+		return
+		
+	match mode: 
+		"ADD": text += 1 
+		"SUBTRACT": text -=1
+		_:
+			print(str(mode) + " is not a valid mode for this function")

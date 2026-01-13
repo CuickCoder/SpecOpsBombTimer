@@ -1,14 +1,14 @@
-extends Node2D
+extends Control
 #This script is for defining what each of the buttons on the control screen 
 #does, and changes the timer according to user input
 
-@onready var BombTimerNode = $BombTimerNode
-@onready var RawTimerNodeLabel = $BombTimerNode/RawTimerLabel
-@onready var FormattedTimerLabel = $BombTimerNode/FormattedTimerLabel
-@onready var Add_Subtract_Field = $"Add Subtract Button/Add_Subtract_Field"
-@onready var CustomTimeFieldMinutes = $"Custom Time Button/Custom Time Field Minutes"
-@onready var CustomTimerFieldSeconds = $"Custom Time Button/Custom Time Field Seconds"
-@onready var ResetTimerButton = $"Reset Timer"
+@export var BombTimerNode: Timer #= $BombTimerNode
+@export var RawTimerNodeLabel: Label #= $BombTimerNode/RawTimerLabel
+@export var FormattedTimerLabel: Label #= $BombTimerNode/FormattedTimerLabel
+@export var Add_Subtract_Field:LineEdit #= $"Add Subtract Button/Add_Subtract_Field"
+@export var CustomTimeFieldMinutes: LineEdit #= $"Custom Time Button/Custom Time Field Minutes"
+@export var CustomTimerFieldSeconds:LineEdit #= $"Custom Time Button/Custom Time Field Seconds"
+@export var ResetTimerButton: Button #= $"Reset Timer"
 var DisplayScreen = preload("res://DisplayScreen.tscn")
 var DefaultStartingTime = 3600.00
 

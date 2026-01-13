@@ -4,141 +4,153 @@
 
 [node name="Farts" type="Control" node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton")]
 layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
+anchors_preset = 0
 script = ExtResource("1_ac2m8")
 BombTimerNode = NodePath("BombTimerNode")
-RawTimerNodeLabel = NodePath("All Controls/Timer Start Stop/VBoxContainer/RawTimerLabel")
-FormattedTimerLabel = NodePath("All Controls/Timer Start Stop/VBoxContainer/FormattedTimerLabel")
-Add_Subtract_Field = NodePath("All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/Add_Subtract_Field")
-CustomTimeFieldMinutes = NodePath("All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer2/Custom Time Field Minutes")
-CustomTimerFieldSeconds = NodePath("All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer2/Custom Time Field Seconds")
-ResetTimerButton = NodePath("All Controls/Timer Start Stop/VBoxContainer/Reset Timer")
+RawTimerNodeLabel = NodePath("RawTimerLabel")
+FormattedTimerLabel = NodePath("FormattedTimerLabel")
+Add_Subtract_Field = NodePath("Add_Subtract_Field")
+CustomTimeFieldMinutes = NodePath("Custom Time Field Minutes")
+CustomTimerFieldSeconds = NodePath("Custom Time Field Seconds")
+ResetTimerButton = NodePath("Reset Timer")
 
 [node name="BombTimerNode" type="Timer" parent="."]
 wait_time = 3600.0
 one_shot = true
 ignore_time_scale = true
 
-[node name="All Controls" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -625.0
-offset_bottom = 625.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 665
-
-[node name="Timer Start Stop" type="Panel" parent="All Controls"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="All Controls/Timer Start Stop"]
-layout_mode = 1
-offset_top = -767.0
-offset_right = 615.0
-offset_bottom = -544.0
-theme_override_constants/separation = 10
-
-[node name="Temp Window Label" type="Label" parent="All Controls/Timer Start Stop/VBoxContainer"]
-layout_mode = 2
+[node name="Temp Window Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 635.0
+offset_bottom = 67.0
 text = "Timer Control Screen
 "
 horizontal_alignment = 1
 
-[node name="RawTimerLabel" type="Label" parent="All Controls/Timer Start Stop/VBoxContainer"]
-layout_mode = 2
+[node name="RawTimerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 87.0
+offset_right = 633.0
+offset_bottom = 136.0
 text = "RawTimerLabel
 "
 horizontal_alignment = 1
 
-[node name="FormattedTimerLabel" type="Label" parent="All Controls/Timer Start Stop/VBoxContainer"]
-layout_mode = 2
+[node name="FormattedTimerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 161.0
+offset_right = 425.0
+offset_bottom = 205.0
 text = "FormattedTimerLabel"
 horizontal_alignment = 1
 
-[node name="Play_Pause Timer Button" type="Button" parent="All Controls/Timer Start Stop/VBoxContainer"]
-layout_mode = 2
+[node name="Play_Pause Timer Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 220.0
+offset_right = 436.0
+offset_bottom = 273.0
 text = "Play/Pause Timer
 "
 icon_alignment = 1
 
-[node name="Reset Timer" type="Button" parent="All Controls/Timer Start Stop/VBoxContainer"]
-layout_mode = 2
+[node name="Reset Timer" type="Button" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 326.0
+offset_right = 447.0
+offset_bottom = 375.0
 text = "Reset Timer"
 
-[node name="Timer Adjustments" type="Panel" parent="All Controls"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="All Controls/Timer Adjustments"]
+[node name="subtract button" type="Button" parent="."]
 layout_mode = 0
-offset_top = -983.0
-offset_right = 615.0
-offset_bottom = -847.0
-theme_override_constants/separation = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="All Controls/Timer Adjustments/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 24
-alignment = 1
-
-[node name="subtract button" type="Button" parent="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
+offset_left = 153.0
+offset_top = 458.0
+offset_right = 217.0
+offset_bottom = 525.0
 text = "-"
 
-[node name="Add_Subtract_Field" type="LineEdit" parent="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
+[node name="Add_Subtract_Field" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 456.0
+offset_right = 381.0
+offset_bottom = 530.0
 size_flags_horizontal = 4
 text = "1"
 placeholder_text = "1"
 
-[node name="add  button" type="Button" parent="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "+"
-
-[node name="Add Subtract Button" type="Button" parent="All Controls/Timer Adjustments/VBoxContainer2"]
-layout_mode = 2
+[node name="Add Subtract Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 561.0
+offset_right = 454.0
+offset_bottom = 615.0
 text = "Add/Subtract
 "
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="All Controls/Timer Adjustments/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
+[node name="add  button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 461.0
+offset_right = 497.0
+offset_bottom = 520.0
+text = "+"
 
-[node name="Custom Time Field Minutes" type="LineEdit" parent="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
+[node name="Custom Time Field Minutes" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 655.0
+offset_right = 313.0
+offset_bottom = 700.0
 text = "1"
 placeholder_text = "1"
 
-[node name="Custom Time Field Seconds" type="LineEdit" parent="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
+[node name="Custom Time Field Seconds" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 657.0
+offset_right = 427.0
+offset_bottom = 700.0
 text = "0"
 
-[node name="Custom Time Button" type="Button" parent="All Controls/Timer Adjustments/VBoxContainer2"]
-layout_mode = 2
+[node name="Custom Time Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 715.0
+offset_right = 425.0
+offset_bottom = 746.0
 text = "Set Custom Time"
 
-[node name="Display Window Controls" type="Panel" parent="All Controls"]
-layout_mode = 2
-
-[node name="Open Window Button" type="Button" parent="All Controls/Display Window Controls"]
+[node name="Open Window Button" type="Button" parent="."]
 layout_mode = 0
-offset_top = -767.0
-offset_right = 615.0
-offset_bottom = -713.0
+offset_left = 235.0
+offset_top = 807.0
+offset_right = 420.0
+offset_bottom = 861.0
 text = "open window
 
 "
 
-[connection signal="pressed" from="All Controls/Timer Start Stop/VBoxContainer/Play_Pause Timer Button" to="." method="Play_or_Pause_timer"]
-[connection signal="pressed" from="All Controls/Timer Start Stop/VBoxContainer/Reset Timer" to="." method="reset_timer"]
-[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/subtract button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
-[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/add  button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
-[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/Add Subtract Button" to="." method="adjust_timer"]
-[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/Custom Time Button" to="." method="adjust_timer"]
-[connection signal="pressed" from="All Controls/Display Window Controls/Open Window Button" to="." method="openTimerDisplayWindow"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -103.0
+offset_top = 70.0
+offset_right = -3.0
+offset_bottom = 170.0
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[connection signal="pressed" from="Play_Pause Timer Button" to="." method="Play_or_Pause_timer"]
+[connection signal="pressed" from="Reset Timer" to="." method="reset_timer"]
+[connection signal="pressed" from="subtract button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
+[connection signal="pressed" from="Add Subtract Button" to="." method="adjust_timer"]
+[connection signal="pressed" from="add  button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
+[connection signal="pressed" from="Custom Time Button" to="." method="adjust_timer"]
+[connection signal="pressed" from="Open Window Button" to="." method="openTimerDisplayWindow"]

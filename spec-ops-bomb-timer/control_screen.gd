@@ -1,5 +1,5 @@
-#extends Control
-extends Node2D
+extends Control
+#extends Node2D
 #This script is for defining what each of the buttons on the control screen 
 #does, and changes the timer according to user input
 

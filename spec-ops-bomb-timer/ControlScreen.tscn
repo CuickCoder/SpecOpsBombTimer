@@ -4,16 +4,10 @@
 
 [node name="Farts" type="Control" node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton")]
 layout_mode = 3
-anchor_left = 0.075
-anchor_top = 0.044000003
-anchor_right = 0.94400007
-anchor_bottom = 0.93900007
-offset_left = 17.249996
-offset_top = 32.999996
-offset_right = -26.600037
-offset_bottom = -28.000061
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 script = ExtResource("1_ac2m8")
 BombTimerNode = NodePath("BombTimerNode")
 RawTimerNodeLabel = NodePath("All Controls/Timer Start Stop/VBoxContainer/RawTimerLabel")
@@ -29,18 +23,17 @@ one_shot = true
 ignore_time_scale = true
 
 [node name="All Controls" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 3.2450001
-anchor_bottom = 2.0
-offset_left = 15.0
-offset_top = 17.0
-offset_right = -19.0
-offset_bottom = -20.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -625.0
+offset_bottom = 625.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 625
+theme_override_constants/separation = 665
 
 [node name="Timer Start Stop" type="Panel" parent="All Controls"]
 layout_mode = 2
@@ -142,22 +135,10 @@ text = "open window
 
 "
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.142
-anchor_top = 0.157
-anchor_right = 0.74700004
-anchor_bottom = 0.80700004
-offset_left = 99.7
-offset_top = 226.157
-offset_right = -31.550018
-offset_bottom = -217.19305
-
 [connection signal="pressed" from="All Controls/Timer Start Stop/VBoxContainer/Play_Pause Timer Button" to="." method="Play_or_Pause_timer"]
 [connection signal="pressed" from="All Controls/Timer Start Stop/VBoxContainer/Reset Timer" to="." method="reset_timer"]
 [connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/subtract button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
-[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/add  button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
+[connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/HBoxContainer/add  button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
 [connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/Add Subtract Button" to="." method="adjust_timer"]
 [connection signal="pressed" from="All Controls/Timer Adjustments/VBoxContainer2/Custom Time Button" to="." method="adjust_timer"]
 [connection signal="pressed" from="All Controls/Display Window Controls/Open Window Button" to="." method="openTimerDisplayWindow"]

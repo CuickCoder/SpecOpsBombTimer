@@ -1,149 +1,218 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpxmn136xil4g"]
+[gd_scene load_steps=4 format=3 uid="uid://cpxmn136xil4g"]
 
 [ext_resource type="Script" uid="uid://bivhgpitfnai1" path="res://control_screen.gd" id="1_ac2m8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac2m8"]
+bg_color = Color(0.68604404, 0.66439795, 0.65705264, 1)
+
+[sub_resource type="Theme" id="Theme_6sida"]
+Label/fonts/font = null
+Panel/styles/panel = SubResource("StyleBoxFlat_ac2m8")
+
 [node name="Farts" type="Control" node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton")]
 layout_mode = 3
-anchor_right = 0.818
-anchor_bottom = 0.416
-offset_right = -531.7
-offset_bottom = -416.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ac2m8")
-BombTimerNode = NodePath("BombTimerNode")
-RawTimerNodeLabel = NodePath("RawTimerLabel")
-FormattedTimerLabel = NodePath("FormattedTimerLabel")
-Add_Subtract_Field = NodePath("Add_Subtract_Field")
-CustomTimeFieldMinutes = NodePath("Custom Time Field Minutes")
-CustomTimerFieldSeconds = NodePath("Custom Time Field Seconds")
-ResetTimerButton = NodePath("Reset Timer")
+BombTimerNode = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/BombTimerNode")
+RawTimerNodeLabel = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/RawTimerLabel")
+FormattedTimerLabel = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/FormattedTimerLabel")
+Add_Subtract_Field = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddSubtractField")
+CustomTimeFieldMinutes = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeMin")
+CustomTimerFieldSeconds = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeSec")
+ResetTimerButton = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer")
 
-[node name="BombTimerNode" type="Timer" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6sida")
+
+[node name="All Buttons" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 21.0
+offset_right = -19.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="WindowLabel" type="Label" parent="UI/All Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Timer Control Screen"
+horizontal_alignment = 1
+
+[node name="TimerButtonsPanel" type="Panel" parent="UI/All Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="TimeButtonsVbox" type="VBoxContainer" parent="UI/All Buttons/TimerButtonsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = 19.0
+offset_right = -183.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="BombTimerNode" type="Timer" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
 wait_time = 3600.0
 one_shot = true
 ignore_time_scale = true
 
-[node name="Temp Window Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 18.0
-offset_right = 635.0
-offset_bottom = 67.0
-text = "Timer Control Screen
-"
+[node name="RawTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RawTimerLabel"
 horizontal_alignment = 1
 
-[node name="RawTimerLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 87.0
-offset_right = 633.0
-offset_bottom = 136.0
-text = "RawTimerLabel
-"
-horizontal_alignment = 1
-
-[node name="FormattedTimerLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 230.0
-offset_top = 161.0
-offset_right = 425.0
-offset_bottom = 205.0
+[node name="FormattedTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "FormattedTimerLabel"
 horizontal_alignment = 1
 
-[node name="Play_Pause Timer Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 229.0
-offset_top = 220.0
-offset_right = 436.0
-offset_bottom = 273.0
+[node name="PlayPauseButton" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
+layout_mode = 2
 text = "Play/Pause Timer
 "
 icon_alignment = 1
 
-[node name="Reset Timer" type="Button" parent="."]
-layout_mode = 0
-offset_left = 205.0
-offset_top = 326.0
-offset_right = 447.0
-offset_bottom = 375.0
+[node name="ResetTimer" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
+layout_mode = 2
 text = "Reset Timer"
 
-[node name="subtract button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 153.0
-offset_top = 458.0
-offset_right = 217.0
-offset_bottom = 525.0
+[node name="WinLoseButtons" type="Panel" parent="UI/All Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseButtons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = 19.0
+offset_right = -183.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
+layout_mode = 2
+text = "Correct Wire"
+
+[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
+layout_mode = 2
+text = "Wrong Wire"
+
+[node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="AdjustMentButtonsVBox" type="VBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 188.0
+offset_top = 14.0
+offset_right = -188.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="AddSubtractRow" type="HBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="SubtractButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
 text = "-"
 
-[node name="Add_Subtract_Field" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 273.0
-offset_top = 456.0
-offset_right = 381.0
-offset_bottom = 530.0
+[node name="AddSubtractField" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
 size_flags_horizontal = 4
 text = "1"
 placeholder_text = "1"
+alignment = 1
 
-[node name="Add Subtract Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 199.0
-offset_top = 561.0
-offset_right = 454.0
-offset_bottom = 615.0
+[node name="AddButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Add Subtract Button" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]
+layout_mode = 2
 text = "Add/Subtract
 "
 
-[node name="add  button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 427.0
-offset_top = 461.0
-offset_right = 497.0
-offset_bottom = 520.0
-text = "+"
+[node name="CustomTimeRow" type="HBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]
+layout_mode = 2
+alignment = 1
 
-[node name="Custom Time Field Minutes" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 223.0
-offset_top = 655.0
-offset_right = 313.0
-offset_bottom = 700.0
+[node name="CustomTimeMin" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow"]
+layout_mode = 2
 text = "1"
 placeholder_text = "1"
+alignment = 1
 
-[node name="Custom Time Field Seconds" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 325.0
-offset_top = 657.0
-offset_right = 427.0
-offset_bottom = 700.0
+[node name="CustomTimeSec" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow"]
+layout_mode = 2
 text = "0"
+alignment = 1
 
-[node name="Custom Time Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 234.0
-offset_top = 715.0
-offset_right = 425.0
-offset_bottom = 746.0
+[node name="CustomTimeButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]
+layout_mode = 2
 text = "Set Custom Time"
 
-[node name="Open Window Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 235.0
-offset_top = 807.0
-offset_right = 420.0
-offset_bottom = 861.0
-text = "open window
+[node name="NewWindowPanel" type="Panel" parent="UI/All Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 
-"
+[node name="PercieIsSexy" type="VBoxContainer" parent="UI/All Buttons/NewWindowPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 188.0
+offset_top = 10.0
+offset_right = -188.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
-[connection signal="pressed" from="Play_Pause Timer Button" to="." method="Play_or_Pause_timer"]
-[connection signal="pressed" from="Reset Timer" to="." method="reset_timer"]
-[connection signal="pressed" from="subtract button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
-[connection signal="pressed" from="Add Subtract Button" to="." method="adjust_timer"]
-[connection signal="pressed" from="add  button" to="." method="ADD_OR_SUBTRACT_FROM_FIELD"]
-[connection signal="pressed" from="Custom Time Button" to="." method="adjust_timer"]
-[connection signal="pressed" from="Open Window Button" to="." method="openTimerDisplayWindow"]
+[node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowPanel/PercieIsSexy"]
+layout_mode = 2
+text = "open window"
+
+[connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton" to="." method="Play_or_Pause_timer"]
+[connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer" to="." method="reset_timer"]
+[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/SubtractButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["SUBTRACT"]]
+[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
+[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/Add Subtract Button" to="." method="adjust_timer" binds= ["ADDSUBTRACT"]]
+[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
+[connection signal="pressed" from="UI/All Buttons/NewWindowPanel/PercieIsSexy/OpenWindowButton" to="." method="openTimerDisplayWindow"]

@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 	#Update the text on screen to show how much time is on timer
 	RawTimerNodeLabel.text = str(BombTimerNode.time_left)
 	FormattedTimerLabel.text = convert_timer_to_MMSS(BombTimerNode.time_left)
+	GlobalScript.FormattedTimerText = FormattedTimerLabel.text
 	
 	#Don't allow the timer reset button to be pressed if timer is running
 	if BombTimerNode.paused: 
@@ -43,6 +44,8 @@ func reset_timer():
 		#godot timers can't have any seconds unless it was started or has been paused
 		BombTimerNode.start(DefaultStartingTime)
 		BombTimerNode.paused = true
+	#Reset the game state! 
+	GlobalScript.CurrentGameState = GlobalScript.GameState.PLAYING
 
 func convert_timer_to_MMSS(time_left: float) -> String:
 	var total_seconds := int(time_left)
@@ -89,10 +92,11 @@ func adjust_timer(mode: String):
 
 func openTimerDisplayWindow():
 	#NEED TO MAKE SURE MULTIPLE DISPLAY WINDOWS CANT BE MADE!!!
-	var doesDisplayWindowExist = get_tree().root.find_child("DisplayScreen", false, false)
-	print(doesDisplayWindowExist)
-	#var DisplayScreenWindow = DisplayScreen.instantiate()
-	#get_tree().root.add_child(DisplayScreenWindow)
+	#var doesDisplayWindowExist = get_tree().root.find_child("DisplayScreen", false, false)
+	#print(doesDisplayWindowExist)
+	#if not doesDisplayWindowExist == null:
+		var DisplayScreenWindow = DisplayScreen.instantiate()
+		get_tree().root.add_child(DisplayScreenWindow)
 
 func ADD_OR_SUBTRACT_FROM_FIELD(mode: String): 
 	#ignore invalid user input in the field 
@@ -113,3 +117,7 @@ func ADD_OR_SUBTRACT_FROM_FIELD(mode: String):
 	
 	#change the field's text to match the result
 	Add_Subtract_Field.text = str(text)
+
+func Correct_wire():
+	GlobalScript.CurrentGameState = GlobalScript.GameState.WIN
+	pass

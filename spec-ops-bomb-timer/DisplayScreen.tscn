@@ -1,24 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://wskk5sfavm4s"]
+[gd_scene load_steps=8 format=3 uid="uid://wskk5sfavm4s"]
 
 [ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
+[ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://DisplayWindowScript.gd" id="1_emsd4"]
+[ext_resource type="Texture2D" uid="uid://bxblioxeei1by" path="res://TimerBackground.jpeg" id="2_h6o0p"]
+[ext_resource type="Texture2D" uid="uid://e7ave82ayvfn" path="res://CautionTape.jpg" id="3_iidtv"]
+[ext_resource type="Shader" uid="uid://cpn1deiusbdab" path="res://CautionTapeShader.gdshader" id="3_tapam"]
+[ext_resource type="FontFile" uid="uid://kwhpl84x6f1k" path="res://pcsenior.ttf" id="5_ry1nn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tapam"]
+shader = ExtResource("3_tapam")
+shader_parameter/TexturePosition = 0.0
+shader_parameter/direction = 1.0
 
 [node name="DisplayScreen" type="Window"]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
-size = Vector2i(500, 500)
+size = Vector2i(1600, 900)
+script = ExtResource("1_emsd4")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="DisplayScreenWrapper" type="Node2D" parent="." node_paths=PackedStringArray("TopTape", "TimerLabel")]
 script = ExtResource("1_b4k55")
+TopTape = NodePath("TopCautionTape")
+TimerLabel = NodePath("Bomb Timer Label")
 
-[node name="Label" type="Label" parent="Node2D"]
-offset_right = 113.0
-offset_bottom = 75.0
-text = "Display Screen
+[node name="TopCautionTape" type="Sprite2D" parent="DisplayScreenWrapper"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_tapam")
+position = Vector2(800.50006, 56.687504)
+scale = Vector2(0.29194817, 0.43035048)
+texture = ExtResource("3_iidtv")
 
-"
+[node name="BottomCautionTape" type="Sprite2D" parent="DisplayScreenWrapper"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_tapam")
+position = Vector2(800.5, 844.1)
+scale = Vector2(0.29194817, 0.4178966)
+texture = ExtResource("3_iidtv")
+flip_h = true
 
-[node name="Bomb Timer Label" type="RichTextLabel" parent="Node2D"]
-offset_left = 18.0
-offset_top = 48.0
-offset_right = 156.0
-offset_bottom = 87.0
+[node name="Sprite2D" type="Sprite2D" parent="DisplayScreenWrapper"]
+position = Vector2(800.50006, 451)
+scale = Vector2(0.31980002, 0.224)
+texture = ExtResource("2_h6o0p")
+
+[node name="Bomb Timer Label" type="RichTextLabel" parent="DisplayScreenWrapper"]
+offset_left = 276.0
+offset_top = 292.0
+offset_right = 1329.0
+offset_bottom = 627.0
+theme_override_fonts/normal_font = ExtResource("5_ry1nn")
+theme_override_font_sizes/normal_font_size = 165
+bbcode_enabled = true
+text = "00:00"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CorrectWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper"]
+offset_left = 173.0
+offset_top = 196.0
+offset_right = 1461.0
+offset_bottom = 302.0
+theme_override_fonts/normal_font = ExtResource("5_ry1nn")
+theme_override_font_sizes/normal_font_size = 96
+text = "Bomb Disarmed"
+
+[node name="CorrectWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper"]
+offset_left = 123.0
+offset_top = 625.0
+offset_right = 1503.0
+offset_bottom = 705.0
+theme_override_fonts/normal_font = ExtResource("5_ry1nn")
+theme_override_font_sizes/normal_font_size = 72
+text = "Good Job, Students!"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpxmn136xil4g"]
+[gd_scene load_steps=6 format=3 uid="uid://cpxmn136xil4g"]
 
 [ext_resource type="Script" uid="uid://bivhgpitfnai1" path="res://control_screen.gd" id="1_ac2m8"]
 
@@ -9,7 +9,13 @@ bg_color = Color(0.68604404, 0.66439795, 0.65705264, 1)
 Label/fonts/font = null
 Panel/styles/panel = SubResource("StyleBoxFlat_ac2m8")
 
-[node name="Farts" type="Control" node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sida"]
+bg_color = Color(0, 0.7219237, 0.14033791, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnqmo"]
+bg_color = Color(0.71269226, 1.2513996e-06, 4.813075e-07, 1)
+
+[node name="Farts" type="Control" node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton", "CorrectWireButton", "WrongWireButton", "PlayPauseButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +30,9 @@ Add_Subtract_Field = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentB
 CustomTimeFieldMinutes = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeMin")
 CustomTimerFieldSeconds = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeSec")
 ResetTimerButton = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer")
+CorrectWireButton = NodePath("UI/All Buttons/WinLoseButtons/WinLoseVbox/CorrectWireButton")
+WrongWireButton = NodePath("UI/All Buttons/WinLoseButtons/WinLoseVbox/WrongWireButton")
+PlayPauseButton = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 1
@@ -76,16 +85,18 @@ wait_time = 3600.0
 one_shot = true
 ignore_time_scale = true
 
-[node name="RawTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "RawTimerLabel"
-horizontal_alignment = 1
-
 [node name="FormattedTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 36
 text = "FormattedTimerLabel"
+horizontal_alignment = 1
+
+[node name="RawTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "RawTimerLabel"
 horizontal_alignment = 1
 
 [node name="PlayPauseButton" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
@@ -97,32 +108,6 @@ icon_alignment = 1
 [node name="ResetTimer" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
 layout_mode = 2
 text = "Reset Timer"
-
-[node name="WinLoseButtons" type="Panel" parent="UI/All Buttons"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseButtons"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 183.0
-offset_top = 19.0
-offset_right = -183.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
-layout_mode = 2
-text = "Correct Wire"
-
-[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
-layout_mode = 2
-text = "Wrong Wire"
 
 [node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons"]
 custom_minimum_size = Vector2(0, 200)
@@ -188,6 +173,36 @@ alignment = 1
 layout_mode = 2
 text = "Set Custom Time"
 
+[node name="WinLoseButtons" type="Panel" parent="UI/All Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseButtons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = 19.0
+offset_right = -183.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_6sida")
+text = "Correct Wire"
+
+[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_cnqmo")
+text = "Wrong Wire"
+
 [node name="NewWindowPanel" type="Panel" parent="UI/All Buttons"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -215,4 +230,6 @@ text = "open window"
 [connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
 [connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/Add Subtract Button" to="." method="adjust_timer" binds= ["ADDSUBTRACT"]]
 [connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseButtons/WinLoseVbox/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseButtons/WinLoseVbox/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
 [connection signal="pressed" from="UI/All Buttons/NewWindowPanel/PercieIsSexy/OpenWindowButton" to="." method="openTimerDisplayWindow"]

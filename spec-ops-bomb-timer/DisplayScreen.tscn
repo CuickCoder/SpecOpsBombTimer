@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wskk5sfavm4s"]
+[gd_scene load_steps=13 format=3 uid="uid://wskk5sfavm4s"]
 
 [ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
 [ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://DisplayWindowScript.gd" id="1_emsd4"]
@@ -12,16 +12,210 @@ shader = ExtResource("3_tapam")
 shader_parameter/TexturePosition = 0.0
 shader_parameter/direction = 1.0
 
+[sub_resource type="Animation" id="Animation_g87df"]
+resource_name = "LOSE"
+length = 8.007
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayScreenWrapper/WrongWireTextTop:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayScreenWrapper/WrongWireTextBottom:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.93333334, 1.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DisplayScreenWrapper/CorrectWireTextTop:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DisplayScreenWrapper/CorrectWireTextBottom:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_emsd4"]
+resource_name = "NEUTRAL_VISUALS"
+length = 0.1915
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayScreenWrapper/CorrectWireTextTop:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayScreenWrapper/CorrectWireTextBottom:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DisplayScreenWrapper/WrongWireTextTop:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DisplayScreenWrapper/WrongWireTextBottom:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yti63"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayScreenWrapper/CorrectWireTextTop:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayScreenWrapper/CorrectWireTextBottom:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xmt7v"]
+resource_name = "WIN"
+length = 8.007
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayScreenWrapper/CorrectWireTextTop:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayScreenWrapper/CorrectWireTextBottom:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.93333334, 1.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DisplayScreenWrapper/WrongWireTextTop:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DisplayScreenWrapper/WrongWireTextBottom:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmt7v"]
+_data = {
+&"LOSE": SubResource("Animation_g87df"),
+&"NEUTRAL_VISUALS": SubResource("Animation_emsd4"),
+&"RESET": SubResource("Animation_yti63"),
+&"WIN": SubResource("Animation_xmt7v")
+}
+
 [node name="DisplayScreen" type="Window"]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(1600, 900)
 script = ExtResource("1_emsd4")
 
-[node name="DisplayScreenWrapper" type="Node2D" parent="." node_paths=PackedStringArray("TopTape", "TimerLabel")]
+[node name="DisplayScreenWrapper" type="Node2D" parent="." node_paths=PackedStringArray("TopTape", "BottomTape", "Background", "TimerLabel", "AnimPlayer")]
 script = ExtResource("1_b4k55")
 TopTape = NodePath("TopCautionTape")
+BottomTape = NodePath("BottomCautionTape")
+Background = NodePath("TimerBackground")
 TimerLabel = NodePath("Bomb Timer Label")
+AnimPlayer = NodePath("AnimationPlayer")
 
 [node name="TopCautionTape" type="Sprite2D" parent="DisplayScreenWrapper"]
 texture_repeat = 2
@@ -38,7 +232,7 @@ scale = Vector2(0.29194817, 0.4178966)
 texture = ExtResource("3_iidtv")
 flip_h = true
 
-[node name="Sprite2D" type="Sprite2D" parent="DisplayScreenWrapper"]
+[node name="TimerBackground" type="Sprite2D" parent="DisplayScreenWrapper"]
 position = Vector2(800.50006, 451)
 scale = Vector2(0.31980002, 0.224)
 texture = ExtResource("2_h6o0p")
@@ -73,3 +267,33 @@ offset_bottom = 705.0
 theme_override_fonts/normal_font = ExtResource("5_ry1nn")
 theme_override_font_sizes/normal_font_size = 72
 text = "Good Job, Students!"
+
+[node name="WrongWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper"]
+offset_left = 173.0
+offset_top = 196.0
+offset_right = 1461.0
+offset_bottom = 302.0
+theme_override_fonts/normal_font = ExtResource("5_ry1nn")
+theme_override_font_sizes/normal_font_size = 96
+text = "WRONG WIRE,"
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="WrongWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper"]
+offset_left = 123.0
+offset_top = 625.0
+offset_right = 1503.0
+offset_bottom = 705.0
+theme_override_fonts/normal_font = ExtResource("5_ry1nn")
+theme_override_font_sizes/normal_font_size = 72
+text = "NICE TRY, STUDENTS!"
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DisplayScreenWrapper"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_xmt7v")
+}

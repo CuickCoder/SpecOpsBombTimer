@@ -1,15 +1,15 @@
 extends Control
-#extends Node2D
 #This script is for defining what each of the buttons on the control screen 
-#does, and changes the timer according to user input
+#does, and changes the timer according to user input. In a future update, 
+#it will also give you compliments
 
-@export var BombTimerNode: Timer #= $BombTimerNode
-@export var RawTimerNodeLabel: Label #= $BombTimerNode/RawTimerLabel
-@export var FormattedTimerLabel: Label #= $BombTimerNode/FormattedTimerLabel
-@export var Add_Subtract_Field:LineEdit #= $"Add Subtract Button/Add_Subtract_Field"
-@export var CustomTimeFieldMinutes: LineEdit #= $"Custom Time Button/Custom Time Field Minutes"
-@export var CustomTimerFieldSeconds:LineEdit #= $"Custom Time Button/Custom Time Field Seconds"
-@export var ResetTimerButton: Button #= $"Reset Timer"
+@export var BombTimerNode: Timer 
+@export var RawTimerNodeLabel: Label 
+@export var FormattedTimerLabel: Label 
+@export var Add_Subtract_Field:LineEdit 
+@export var CustomTimeFieldMinutes: LineEdit 
+@export var CustomTimerFieldSeconds:LineEdit 
+@export var ResetTimerButton: Button 
 @export var CorrectWireButton: Button 
 @export var WrongWireButton: Button
 @export var PlayPauseButton: Button
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		ResetTimerButton.disabled = false
 	else: 
 		ResetTimerButton.disabled = true
-		
+	
 	updateGlobalScript()
 
 func updateGlobalScript():
@@ -105,10 +105,7 @@ func adjust_timer(mode: String):
 	BombTimerNode.paused = was_paused #returns timer to the state it was already in
 
 func openTimerDisplayWindow():
-	#NEED TO MAKE SURE MULTIPLE DISPLAY WINDOWS CANT BE MADE!!!
-	#var doesDisplayWindowExist = get_tree().root.find_child("DisplayScreen", false, false)
-	#print(doesDisplayWindowExist)
-	#if not doesDisplayWindowExist == null:
+	if not get_tree().root.has_node("DisplayScreen"):
 		var DisplayScreenWindow = DisplayScreen.instantiate()
 		get_tree().root.add_child(DisplayScreenWindow)
 

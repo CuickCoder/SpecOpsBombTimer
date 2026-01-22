@@ -5,78 +5,77 @@ extends Node
 @export var TopTape: Sprite2D
 @export var BottomTape: Sprite2D
 @export var Background: Sprite2D
-@export var scroll_speed := 0.1
+#@export var scroll_speed := 0.1
 @export var TimerLabel: RichTextLabel
 @export var AnimPlayer: AnimationPlayer
 var MinScrollSpeed = .01
-var MaxScrollSpeed = .20
+var MaxScrollSpeed = .35
+var TextShakeAmount = 25.0
+var TextShakeRate = 25.0
 var TexturePosition := 0.0
-var timeLeftRatio = 1.0
 var backgroundTint = Color.WHITE
+var panicModeMinutes = 5
+var panicModeStarted = false
 
 func _ready():
+	#tapeScrollSpeed = MinScrollSpeed
 	GlobalScript.state_changed.connect(on_state_changed_signal)
 	AnimPlayer.play("NEUTRAL_VISUALS")
-	pass 
-	
+
 func _process(delta):
-	#Timer Based Updating of visuals
+	#Figure out what to display based on bombtime & gamestate
 	if not GlobalScript.BombTimerPaused \
 	and GlobalScript.CurrentGameState == GlobalScript.GameState.PLAYING:
-		#We need to know what fraction of the Bomb's time is left 
-		timeLeftRatio = GlobalScript.BombTimerTimeLeft /GlobalScript.timerStartingAmount
-		timeLeftRatio = clamp(timeLeftRatio,0.0,1.0)
-		
-		#These will use the ratio we found just above
-		HandleTapeMovement(delta)
-		HandleBackgroundTint()
-		HandleTimerShake()
-	else: 
+		#Display the normal timer screen if we haven't hit panic mode yet
+		if GlobalScript.BombTimerTimeLeft > (panicModeMinutes * 60) \
+		and not panicModeStarted:
+			HandleNormalMode(delta)
+		#Timer is below panic mode threshold, do panic mode
+		else:
+			HandlePanicMode(delta)
+	#Timer is paused and reset, display the correct time for the game master
+	else:
 		TimerLabel.text = GlobalScript.FormattedTimerText
 
-func HandleTimerShake():
-	var baseText = GlobalScript.FormattedTimerText
-	#var shakeLevel = int(1 / timeLeftRatio)
-	#var shakeRate = int(1 / timeLeftRatio )
-	#var adjustedScrollSpeed = lerp(MaxScrollSpeed,MinScrollSpeed,timeLeftRatio)
-	
-	var shakeLevel = int(lerp(12.0,0.0,timeLeftRatio))
-	var shakeRate = int(lerp(25.0,0.0,timeLeftRatio))
-	
-	print(str(shakeLevel) + " " + str(shakeRate))
-	TimerLabel.text = "[shake level=%f rate=%f]%s[/shake]" % [shakeLevel, shakeRate, baseText]
-	
-	#TimerLabel.text = "[shake level=100 rate=25]YOUR TEXT HERE[/shake]"
+func HandleNormalMode(delta):
+	HandleTapeMovement(delta, MinScrollSpeed)
+	TimerLabel.text = GlobalScript.FormattedTimerText
 	pass
 
-func HandleBackgroundTint():
-	backgroundTint = Color(1,timeLeftRatio,timeLeftRatio)
-	Background.modulate = backgroundTint
+func HandlePanicMode(delta):
+	#Do these once per panic mode
+	if not panicModeStarted:
+		AnimPlayer.play("PANIC_MODE") 
+		panicModeStarted = true
+	
+	var baseText = GlobalScript.FormattedTimerText
+	TimerLabel.text = "[shake level=%f rate=%f]%s[/shake]" % [TextShakeAmount, TextShakeRate, baseText]
+	Background.modulate = Color.RED
+	HandleTapeMovement(delta, MaxScrollSpeed)
+	
 
-func HandleTapeMovement(delta):
+func HandleTapeMovement(delta, scrollSpeed):
 	#Both tapes share a shader, so we only need to update one 
-	var adjustedScrollSpeed = lerp(MaxScrollSpeed,MinScrollSpeed,timeLeftRatio)
-	TexturePosition = fposmod(TexturePosition + adjustedScrollSpeed * delta, 1.0)
+	if GlobalScript.BombTimerPaused: 
+		return #Tape shouldn't move at all if timer is paused
+	
+	TexturePosition = fposmod(TexturePosition + scrollSpeed * delta, 1.0)
 	(TopTape.material as ShaderMaterial).set_shader_parameter("TexturePosition", TexturePosition)
-
-func modulateAll(newColor: Color):
-	TopTape.modulate = newColor
-	BottomTape.modulate = newColor
-	Background.modulate = newColor
 
 func on_state_changed_signal(state: GlobalScript.GameState): 
 	match state:
 		GlobalScript.GameState.PLAYING:
+			panicModeStarted = false
 			AnimPlayer.play("NEUTRAL_VISUALS")
-			scroll_speed = MinScrollSpeed
-			modulateAll(Color.WHITE)
+			#scroll_speed = MinScrollSpeed
+			Background.modulate = (Color.WHITE)
 			
 		GlobalScript.GameState.WIN:
-			scroll_speed = 0
+			#scroll_speed = 0
 			AnimPlayer.play("WIN")
-			modulateAll(Color.LAWN_GREEN)
-
+			Background.modulate = (Color.LAWN_GREEN)
+			
 		GlobalScript.GameState.LOSE:
-			scroll_speed = 0
+			#scroll_speed = 0
 			AnimPlayer.play("LOSE")
-			modulateAll(Color.DARK_RED)
+			Background.modulate = (Color.DARK_RED)

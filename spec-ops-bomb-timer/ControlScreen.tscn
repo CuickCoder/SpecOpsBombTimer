@@ -88,7 +88,7 @@ ignore_time_scale = true
 [node name="FormattedTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 53
 text = "FormattedTimerLabel"
 horizontal_alignment = 1
 
@@ -222,7 +222,7 @@ alignment = 1
 
 [node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowPanel/PercieIsSexy"]
 layout_mode = 2
-text = "open window"
+text = "Open Timer Window"
 
 [connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton" to="." method="Play_or_Pause_timer"]
 [connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer" to="." method="reset_timer"]

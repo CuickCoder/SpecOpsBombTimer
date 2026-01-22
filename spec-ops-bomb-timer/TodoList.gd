@@ -1,11 +1,7 @@
-extends Node
+#TODO LIST 
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#The bomber timer screen is squished when on the smaller screen
+#Need to fix theme for the control screen 
+#need to make a separate folder in repository for exported .EXEs
+#need to remove the old exe and the .pck file that it depends on
+#control screen needs a timer view 

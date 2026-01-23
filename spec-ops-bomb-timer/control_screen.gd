@@ -107,6 +107,7 @@ func adjust_timer(mode: String):
 func openTimerDisplayWindow():
 	if not get_tree().root.has_node("DisplayScreen"):
 		var DisplayScreenWindow = DisplayScreen.instantiate()
+		DisplayScreenWindow.position = get_window().position
 		get_tree().root.add_child(DisplayScreenWindow)
 
 func ADD_OR_SUBTRACT_FROM_FIELD(mode: String): 

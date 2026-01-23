@@ -8,13 +8,13 @@ extends Node
 #@export var scroll_speed := 0.1
 @export var TimerLabel: RichTextLabel
 @export var AnimPlayer: AnimationPlayer
-var MinScrollSpeed = .01
+var MinScrollSpeed = .05
 var MaxScrollSpeed = .35
 var TextShakeAmount = 25.0
 var TextShakeRate = 25.0
 var TexturePosition := 0.0
 var backgroundTint = Color.WHITE
-var panicModeMinutes = 5
+var panicModeMinutes = 10
 var panicModeStarted = false
 
 func _ready():
@@ -78,4 +78,4 @@ func on_state_changed_signal(state: GlobalScript.GameState):
 		GlobalScript.GameState.LOSE:
 			#scroll_speed = 0
 			AnimPlayer.play("LOSE")
-			Background.modulate = (Color.DARK_RED)
+			Background.modulate = (Color.ORANGE_RED)

@@ -5,8 +5,9 @@ extends Window
 
 func _ready():
 	content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
-	content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
-	content_scale_size = size  # 👈 use the window’s initial size
+	content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
+	content_scale_size = size
+
 
 func _on_close_requested() -> void:
 	#the X button on the timer screen doesn't do diddly unless you

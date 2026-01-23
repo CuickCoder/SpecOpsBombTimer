@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
 [ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://DisplayWindowScript.gd" id="1_emsd4"]
-[ext_resource type="Texture2D" uid="uid://bxblioxeei1by" path="res://TimerBackground.jpeg" id="2_h6o0p"]
 [ext_resource type="Texture2D" uid="uid://e7ave82ayvfn" path="res://CautionTape.jpg" id="3_iidtv"]
 [ext_resource type="Shader" uid="uid://cpn1deiusbdab" path="res://CautionTapeShader.gdshader" id="3_tapam"]
+[ext_resource type="Texture2D" uid="uid://dyutvnyp7w11b" path="res://TimerBackgroundBrighter.jpg" id="5_emsd4"]
 [ext_resource type="FontFile" uid="uid://kwhpl84x6f1k" path="res://pcsenior.ttf" id="5_ry1nn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tapam"]
@@ -432,7 +432,7 @@ flip_h = true
 [node name="TimerBackground" type="Sprite2D" parent="DisplayScreenWrapper"]
 position = Vector2(800.50006, 451)
 scale = Vector2(0.31980002, 0.224)
-texture = ExtResource("2_h6o0p")
+texture = ExtResource("5_emsd4")
 
 [node name="Bomb Timer Label" type="RichTextLabel" parent="DisplayScreenWrapper"]
 offset_left = 276.0

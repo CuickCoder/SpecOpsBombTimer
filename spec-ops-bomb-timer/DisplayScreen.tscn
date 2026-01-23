@@ -430,6 +430,7 @@ texture = ExtResource("3_iidtv")
 flip_h = true
 
 [node name="TimerBackground" type="Sprite2D" parent="DisplayScreenWrapper"]
+modulate = Color(0.90588236, 0.90588236, 0.90588236, 1)
 position = Vector2(800.50006, 451)
 scale = Vector2(0.31980002, 0.224)
 texture = ExtResource("5_emsd4")

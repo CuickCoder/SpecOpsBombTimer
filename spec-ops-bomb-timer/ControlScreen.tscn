@@ -151,7 +151,7 @@ text = "+"
 
 [node name="Add Subtract Button" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]
 layout_mode = 2
-text = "Add/Subtract
+text = "Update Time
 "
 
 [node name="CustomTimeRow" type="HBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox"]

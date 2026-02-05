@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="SpecOpsBombTimer"
 run/main_scene="uid://cpxmn136xil4g"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://brwqlsr410n3f"
+config/windows_native_icon="res://bomb_face_icon_zoomed.ico"
 
 [autoload]
 

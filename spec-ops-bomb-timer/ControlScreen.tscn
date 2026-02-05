@@ -16,6 +16,15 @@ Panel/styles/panel = SubResource("StyleBoxFlat_ac2m8")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ib4mp"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h5ei"]
+bg_color = Color(0.5053437, 0.50534415, 0.50534403, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sida"]
 bg_color = Color(0, 0.87235683, 0.17893097, 1)
 corner_radius_top_left = 7
@@ -38,16 +47,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ac2m8")
-BombTimerNode = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/BombTimerNode")
-RawTimerNodeLabel = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/RawTimerLabel")
-FormattedTimerLabel = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/FormattedTimerLabel")
-Add_Subtract_Field = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddSubtractField")
-CustomTimeFieldMinutes = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeMin")
-CustomTimerFieldSeconds = NodePath("UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeSec")
-ResetTimerButton = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer")
-CorrectWireButton = NodePath("UI/All Buttons/WinLoseButtons/WinLoseVbox/CorrectWireButton")
-WrongWireButton = NodePath("UI/All Buttons/WinLoseButtons/WinLoseVbox/WrongWireButton")
-PlayPauseButton = NodePath("UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton")
+BombTimerNode = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/BombTimerNode")
+RawTimerNodeLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/RawTimerLabel")
+FormattedTimerLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/FormattedTimerLabel")
+Add_Subtract_Field = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddSubtractField")
+CustomTimeFieldMinutes = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeMin")
+CustomTimerFieldSeconds = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeSec")
+ResetTimerButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/ResetTimer")
+CorrectWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton")
+WrongWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton")
+PlayPauseButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton")
 
 [node name="UI" type="Control" parent="." unique_id=1622509251]
 layout_mode = 1
@@ -77,27 +86,38 @@ offset_right = -19.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 20
 
-[node name="HBoxContainer" type="VBoxContainer" parent="UI/All Buttons" unique_id=1357739684]
+[node name="ControlsWindowLabelVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=1357739684]
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="WindowLabel" type="Label" parent="UI/All Buttons/HBoxContainer" unique_id=1044784128]
+[node name="WindowLabel" type="Label" parent="UI/All Buttons/ControlsWindowLabelVbox" unique_id=1044784128]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("2_1h5ei")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1h5ei")
 text = "Bomb Timer Controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerButtonsPanel" type="Panel" parent="UI/All Buttons" unique_id=535356217]
-custom_minimum_size = Vector2(0, 247.565)
+[node name="TimerVBox" type="VBoxContainer" parent="UI/All Buttons" unique_id=521560037]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/TimerVBox" unique_id=920392917]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("2_1h5ei")
+text = "Timer"
+horizontal_alignment = 1
+
+[node name="TimerButtonsPanel" type="Panel" parent="UI/All Buttons/TimerVBox" unique_id=535356217]
+custom_minimum_size = Vector2(0, 181.325)
 layout_mode = 2
 theme = ExtResource("2_6sida")
 
-[node name="TimeButtonsVbox" type="VBoxContainer" parent="UI/All Buttons/TimerButtonsPanel" unique_id=966980603]
+[node name="TimeButtonsVbox" type="VBoxContainer" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel" unique_id=966980603]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,26 +131,19 @@ grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=920392917]
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
-text = "Timer"
-horizontal_alignment = 1
-
-[node name="BombTimerNode" type="Timer" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=204765542]
+[node name="BombTimerNode" type="Timer" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox" unique_id=204765542]
 wait_time = 3600.0
 one_shot = true
 ignore_time_scale = true
 
-[node name="FormattedTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=2064256729]
+[node name="FormattedTimerLabel" type="Label" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox" unique_id=2064256729]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 53
 text = "FormattedTimerLabel"
 horizontal_alignment = 1
 
-[node name="RawTimerLabel" type="Label" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=2110048691]
+[node name="RawTimerLabel" type="Label" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox" unique_id=2110048691]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -138,22 +151,33 @@ theme_override_font_sizes/font_size = 12
 text = "RawTimerLabel"
 horizontal_alignment = 1
 
-[node name="PlayPauseButton" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=1037871261]
+[node name="PlayPauseButton" type="Button" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox" unique_id=1037871261]
 layout_mode = 2
 text = "Play/Pause Timer
 "
 icon_alignment = 1
 
-[node name="ResetTimer" type="Button" parent="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox" unique_id=1475844214]
+[node name="ResetTimer" type="Button" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox" unique_id=1475844214]
 layout_mode = 2
 text = "Reset Timer"
 
-[node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons" unique_id=619584387]
-custom_minimum_size = Vector2(0, 258.71)
+[node name="TimeAdjustmentVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=2024669909]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/TimeAdjustmentVbox" unique_id=570115296]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("2_1h5ei")
+text = " Timer Adjustment"
+horizontal_alignment = 1
+
+[node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons/TimeAdjustmentVbox" unique_id=619584387]
+custom_minimum_size = Vector2(0, 203.67)
 layout_mode = 2
 theme = ExtResource("2_6sida")
 
-[node name="AdjustMentButtonsVBox" type="VBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel" unique_id=1251126065]
+[node name="AdjustMentButtonsVBox" type="VBoxContainer" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel" unique_id=1251126065]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,18 +191,11 @@ grow_vertical = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=570115296]
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
-text = " Timer Controls "
-horizontal_alignment = 1
-
-[node name="AddSubtractRow" type="HBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=459121203]
+[node name="AddSubtractRow" type="HBoxContainer" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=459121203]
 layout_mode = 2
 alignment = 1
 
-[node name="SubtractButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=478567102]
+[node name="SubtractButton" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=478567102]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -186,7 +203,7 @@ theme_override_styles/normal = ExtResource("3_cnqmo")
 theme_override_styles/hover = ExtResource("4_utm8f")
 text = "-"
 
-[node name="AddSubtractField" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=133351785]
+[node name="AddSubtractField" type="LineEdit" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=133351785]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -194,7 +211,7 @@ text = "1"
 placeholder_text = "1"
 alignment = 1
 
-[node name="AddButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=1360069281]
+[node name="AddButton" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=1360069281]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -203,7 +220,7 @@ theme_override_styles/normal = ExtResource("3_cnqmo")
 theme_override_styles/hover = ExtResource("4_utm8f")
 text = "+"
 
-[node name="Add Subtract Button" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=1641531714]
+[node name="Add Subtract Button" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=1641531714]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("3_cnqmo")
@@ -211,45 +228,56 @@ theme_override_styles/hover = ExtResource("4_utm8f")
 text = "Update Time
 "
 
-[node name="CustomTimeRow" type="HBoxContainer" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=565143416]
+[node name="CustomTimeRow" type="HBoxContainer" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=565143416]
 layout_mode = 2
 alignment = 1
 
-[node name="CustomTimeMin" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=234193281]
+[node name="CustomTimeMin" type="LineEdit" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=234193281]
 layout_mode = 2
 text = "55"
 placeholder_text = "00"
 alignment = 1
 
-[node name="CustomTimeMin2" type="Label" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=1641851676]
+[node name="CustomTimeMin2" type="Label" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=1641851676]
 layout_mode = 2
 theme_override_font_sizes/font_size = 31
 text = ":"
 
-[node name="CustomTimeSec" type="LineEdit" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=897391689]
+[node name="CustomTimeSec" type="LineEdit" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow" unique_id=897391689]
 layout_mode = 2
 text = "00"
 placeholder_text = "00"
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=1401977237]
+[node name="Label" type="Label" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=1401977237]
 layout_mode = 2
 text = "Minutes & Seconds"
 horizontal_alignment = 1
 
-[node name="CustomTimeButton" type="Button" parent="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=443824184]
+[node name="CustomTimeButton" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=443824184]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("3_cnqmo")
 theme_override_styles/hover = ExtResource("4_utm8f")
 text = "Set Custom Time"
 
-[node name="WinLoseButtons" type="Panel" parent="UI/All Buttons" unique_id=676309629]
-custom_minimum_size = Vector2(0, 155.485)
+[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=2014391123]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="WinLosePanelLabel" type="Label" parent="UI/All Buttons/WinLoseVbox" unique_id=110929692]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("2_1h5ei")
+text = " Win/Lose Controls "
+horizontal_alignment = 1
+
+[node name="WinLoseButtons" type="Panel" parent="UI/All Buttons/WinLoseVbox" unique_id=676309629]
+custom_minimum_size = Vector2(0, 104.86)
 layout_mode = 2
 theme = ExtResource("2_6sida")
 
-[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseButtons" unique_id=1562807411]
+[node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons" unique_id=1562807411]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,14 +291,7 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="WinLosePanelLabel" type="Label" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox" unique_id=110929692]
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
-text = " Win/Lose Controls "
-horizontal_alignment = 1
-
-[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox" unique_id=1119812976]
+[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1119812976]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
@@ -278,7 +299,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6sida")
 text = "WIN
 "
 
-[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseButtons/WinLoseVbox" unique_id=1682964664]
+[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1682964664]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
@@ -286,12 +307,23 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_cnqmo")
 text = "LOSE
 "
 
-[node name="NewWindowPanel" type="Panel" parent="UI/All Buttons" unique_id=1557543696]
-custom_minimum_size = Vector2(0, 128.535)
+[node name="NewWindowVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=862937637]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NewWindowPanelLabel" type="Label" parent="UI/All Buttons/NewWindowVbox" unique_id=990554384]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("2_1h5ei")
+text = " Timer Window"
+horizontal_alignment = 1
+
+[node name="NewWindowPanel" type="Panel" parent="UI/All Buttons/NewWindowVbox" unique_id=1557543696]
+custom_minimum_size = Vector2(0, 93.84)
 layout_mode = 2
 theme = ExtResource("2_6sida")
 
-[node name="PercieIsSexy" type="VBoxContainer" parent="UI/All Buttons/NewWindowPanel" unique_id=451061242]
+[node name="PercieIsSexy" type="VBoxContainer" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel" unique_id=451061242]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -304,23 +336,16 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="NewWindowPanelLabel" type="Label" parent="UI/All Buttons/NewWindowPanel/PercieIsSexy" unique_id=990554384]
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
-text = " Timer Display Controls "
-horizontal_alignment = 1
-
-[node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowPanel/PercieIsSexy" unique_id=1311968957]
+[node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel/PercieIsSexy" unique_id=1311968957]
 layout_mode = 2
 text = "Open Timer Window"
 
-[connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton" to="." method="Play_or_Pause_timer"]
-[connection signal="pressed" from="UI/All Buttons/TimerButtonsPanel/TimeButtonsVbox/ResetTimer" to="." method="reset_timer"]
-[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/SubtractButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["SUBTRACT"]]
-[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
-[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/Add Subtract Button" to="." method="adjust_timer" binds= ["ADDSUBTRACT"]]
-[connection signal="pressed" from="UI/All Buttons/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
-[connection signal="pressed" from="UI/All Buttons/WinLoseButtons/WinLoseVbox/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
-[connection signal="pressed" from="UI/All Buttons/WinLoseButtons/WinLoseVbox/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
-[connection signal="pressed" from="UI/All Buttons/NewWindowPanel/PercieIsSexy/OpenWindowButton" to="." method="openTimerDisplayWindow"]
+[connection signal="pressed" from="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton" to="." method="Play_or_Pause_timer"]
+[connection signal="pressed" from="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/ResetTimer" to="." method="reset_timer"]
+[connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/SubtractButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["SUBTRACT"]]
+[connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
+[connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/Add Subtract Button" to="." method="adjust_timer" binds= ["ADDSUBTRACT"]]
+[connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
+[connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/PercieIsSexy/OpenWindowButton" to="." method="openTimerDisplayWindow"]

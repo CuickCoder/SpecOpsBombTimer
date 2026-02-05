@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wskk5sfavm4s"]
+[gd_scene format=3 uid="uid://wskk5sfavm4s"]
 
 [ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
 [ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://DisplayWindowScript.gd" id="1_emsd4"]
@@ -400,13 +400,13 @@ _data = {
 &"WIN": SubResource("Animation_xmt7v")
 }
 
-[node name="DisplayScreen" type="Window"]
+[node name="DisplayScreen" type="Window" unique_id=179201356]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(1600, 900)
 script = ExtResource("1_emsd4")
 
-[node name="DisplayScreenWrapper" type="Node2D" parent="." node_paths=PackedStringArray("TopTape", "BottomTape", "Background", "TimerLabel", "AnimPlayer")]
+[node name="DisplayScreenWrapper" type="Node2D" parent="." unique_id=1173190863 node_paths=PackedStringArray("TopTape", "BottomTape", "Background", "TimerLabel", "AnimPlayer")]
 script = ExtResource("1_b4k55")
 TopTape = NodePath("TopCautionTape")
 BottomTape = NodePath("BottomCautionTape")
@@ -414,14 +414,14 @@ Background = NodePath("TimerBackground")
 TimerLabel = NodePath("Bomb Timer Label")
 AnimPlayer = NodePath("AnimationPlayer")
 
-[node name="TopCautionTape" type="Sprite2D" parent="DisplayScreenWrapper"]
+[node name="TopCautionTape" type="Sprite2D" parent="DisplayScreenWrapper" unique_id=368125833]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_tapam")
 position = Vector2(800.50006, 56.687504)
 scale = Vector2(0.29194817, 0.43035048)
 texture = ExtResource("3_iidtv")
 
-[node name="BottomCautionTape" type="Sprite2D" parent="DisplayScreenWrapper"]
+[node name="BottomCautionTape" type="Sprite2D" parent="DisplayScreenWrapper" unique_id=522777240]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_tapam")
 position = Vector2(800.5, 844.1)
@@ -429,13 +429,13 @@ scale = Vector2(0.29194817, 0.4178966)
 texture = ExtResource("3_iidtv")
 flip_h = true
 
-[node name="TimerBackground" type="Sprite2D" parent="DisplayScreenWrapper"]
+[node name="TimerBackground" type="Sprite2D" parent="DisplayScreenWrapper" unique_id=1696364794]
 modulate = Color(0.90588236, 0.90588236, 0.90588236, 1)
 position = Vector2(800.50006, 451)
 scale = Vector2(0.31980002, 0.224)
 texture = ExtResource("5_emsd4")
 
-[node name="Bomb Timer Label" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="Bomb Timer Label" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=802197407]
 offset_left = 276.0
 offset_top = 292.0
 offset_right = 1329.0
@@ -448,7 +448,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CorrectWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="CorrectWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=1464753639]
 offset_left = 173.0
 offset_top = 196.0
 offset_right = 1461.0
@@ -458,7 +458,7 @@ theme_override_fonts/normal_font = ExtResource("5_ry1nn")
 theme_override_font_sizes/normal_font_size = 96
 text = "Bomb Disarmed"
 
-[node name="CorrectWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="CorrectWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=1176242609]
 offset_left = 123.0
 offset_top = 625.0
 offset_right = 1503.0
@@ -468,7 +468,7 @@ theme_override_fonts/normal_font = ExtResource("5_ry1nn")
 theme_override_font_sizes/normal_font_size = 72
 text = "Good Job, Students!"
 
-[node name="WrongWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="WrongWireTextTop" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=1787401406]
 offset_left = 173.0
 offset_top = 196.0
 offset_right = 1461.0
@@ -476,12 +476,12 @@ offset_bottom = 302.0
 theme_override_colors/default_color = Color(1, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("5_ry1nn")
 theme_override_font_sizes/normal_font_size = 96
-text = "WRONG WIRE,"
+text = "TEST FAILED,"
 horizontal_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 
-[node name="WrongWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="WrongWireTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=1136660306]
 offset_left = 123.0
 offset_top = 625.0
 offset_right = 1503.0
@@ -494,7 +494,7 @@ horizontal_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 
-[node name="PanicTextTop" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="PanicTextTop" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=290711622]
 offset_left = 173.0
 offset_top = 196.0
 offset_right = 1461.0
@@ -504,7 +504,7 @@ theme_override_font_sizes/normal_font_size = 67
 text = "TIME IS ALMOST OUT,"
 horizontal_alignment = 1
 
-[node name="PanicTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper"]
+[node name="PanicTextBottom" type="RichTextLabel" parent="DisplayScreenWrapper" unique_id=2078939442]
 offset_left = 123.0
 offset_top = 622.0
 offset_right = 1503.0
@@ -514,10 +514,8 @@ theme_override_font_sizes/normal_font_size = 72
 text = "HURRY UP, STUDENTS!"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DisplayScreenWrapper"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DisplayScreenWrapper" unique_id=1145614539]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_xmt7v")
-}
+libraries/ = SubResource("AnimationLibrary_xmt7v")
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

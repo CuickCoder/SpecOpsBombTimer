@@ -10,11 +10,11 @@ extends Node
 @export var AnimPlayer: AnimationPlayer
 var MinScrollSpeed = .05
 var MaxScrollSpeed = .35
-var TextShakeAmount = 25.0
+var TextShakeAmount = 40.0
 var TextShakeRate = 25.0
 var TexturePosition := 0.0
 var backgroundTint = Color.WHITE
-var panicModeMinutes = 10
+var panicModeMinutes = 5
 var panicModeStarted = false
 
 func _ready():

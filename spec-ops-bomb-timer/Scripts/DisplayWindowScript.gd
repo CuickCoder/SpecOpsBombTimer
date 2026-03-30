@@ -7,6 +7,8 @@ func _ready():
 	content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	content_scale_aspect = Window.CONTENT_SCALE_ASPECT_IGNORE
 	content_scale_size = size
+	GlobalScript.close_display_button_pressed.connect(
+		_on_close_requested)
 
 
 func _on_close_requested() -> void:

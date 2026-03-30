@@ -10,6 +10,7 @@ var timerStartingAmount = 3300 #this is a placeholder
 enum GameState {PLAYING,WIN,LOSE} #PLAYING also used as idle state
 var CurrentGameState = GameState.PLAYING
 signal state_changed(new_state)
+signal close_display_button_pressed()
 
 func _ready() -> void:
 	#Start in the standby state

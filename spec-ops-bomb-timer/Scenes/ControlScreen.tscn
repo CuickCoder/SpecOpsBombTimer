@@ -39,7 +39,7 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[node name="Farts" type="Control" unique_id=2139415027 node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton", "CorrectWireButton", "WrongWireButton", "PlayPauseButton")]
+[node name="Farts" type="Control" unique_id=2139415027 node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton", "CorrectWireButton", "WrongWireButton", "PlayPauseButton", "CloseTimerButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +57,7 @@ ResetTimerButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButt
 CorrectWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton")
 WrongWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton")
 PlayPauseButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton")
+CloseTimerButton = NodePath("UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/CloseTimerWindowButton")
 
 [node name="UI" type="Control" parent="." unique_id=1622509251]
 layout_mode = 1
@@ -323,22 +324,30 @@ custom_minimum_size = Vector2(0, 93.84)
 layout_mode = 2
 theme = ExtResource("3_6krae")
 
-[node name="PercieIsSexy" type="VBoxContainer" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel" unique_id=451061242]
+[node name="Timer Control VBox" type="HBoxContainer" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel" unique_id=769375509]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 188.0
+offset_left = 108.0
 offset_top = 10.0
-offset_right = -188.0
+offset_right = -96.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 15
 alignment = 1
 
-[node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel/PercieIsSexy" unique_id=1311968957]
+[node name="OpenWindowButton" type="Button" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox" unique_id=1311968957]
 layout_mode = 2
-text = "Open Timer Window"
+text = "   Open Timer Window   "
+
+[node name="CloseTimerWindowButton" type="Button" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox" unique_id=1330255433]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_cnqmo")
+text = "   X   "
 
 [connection signal="pressed" from="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton" to="." method="Play_or_Pause_timer"]
 [connection signal="pressed" from="UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/ResetTimer" to="." method="reset_timer"]
@@ -348,4 +357,5 @@ text = "Open Timer Window"
 [connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
 [connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
 [connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
-[connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/PercieIsSexy/OpenWindowButton" to="." method="openTimerDisplayWindow"]
+[connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/OpenWindowButton" to="." method="openTimerDisplayWindow"]
+[connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/CloseTimerWindowButton" to="." method="close_timer_window_button_pressed"]

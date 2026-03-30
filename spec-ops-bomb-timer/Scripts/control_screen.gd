@@ -13,6 +13,7 @@ extends Control
 @export var CorrectWireButton: Button 
 @export var WrongWireButton: Button
 @export var PlayPauseButton: Button
+@export var CloseTimerButton: Button
 var DisplayScreen = preload("res://Scenes/DisplayScreen.tscn")
 var DefaultStartingTime = 3300.00
 
@@ -28,10 +29,13 @@ func _process(delta: float) -> void:
 	RawTimerNodeLabel.text = str(BombTimerNode.time_left)
 	FormattedTimerLabel.text = convert_timer_to_MMSS(BombTimerNode.time_left)
 	
-	#Don't allow the timer reset button to be pressed if timer is running
-	if BombTimerNode.paused: 
+	#Don't allow the timer reset or close window buttons to
+	#be pressed if timer is running
+	if BombTimerNode.paused or BombTimerNode.time_left == 0.0: 
 		ResetTimerButton.disabled = false
+		CloseTimerButton.disabled = false
 	else: 
+		CloseTimerButton.disabled = true
 		ResetTimerButton.disabled = true
 	
 	updateGlobalScript()
@@ -68,6 +72,8 @@ func convert_timer_to_MMSS(time_left: float) -> String:
 	return "%02d:%02d" % [minutes, seconds]
 
 func adjust_timer(mode: String):
+	#this is the function that actually changes the timer
+	
 	var new_time #the new time to set, this will get set in the match statement
 	
 	match mode: 
@@ -104,16 +110,15 @@ func adjust_timer(mode: String):
 	BombTimerNode.start(new_time) #can only change time on timer when you start it 
 	BombTimerNode.paused = was_paused #returns timer to the state it was already in
 
-func openTimerDisplayWindow():
-	if not get_tree().root.has_node("DisplayScreen"):
-		var DisplayScreenWindow = DisplayScreen.instantiate()
-		DisplayScreenWindow.position = get_window().position
-		get_tree().root.add_child(DisplayScreenWindow)
-
 func ADD_OR_SUBTRACT_FROM_FIELD(mode: String): 
+	#This function DOES NOT TOUCH THE TIMER it only adds
+	#or subtracts from the number in the field that the 
+	#user can type input into. The text in that field 
+	#is then passed when another button calls adjust_timer()
+	
 	#ignore invalid user input in the field 
 	if not Add_Subtract_Field.text.is_valid_int():
-		Add_Subtract_Field.text = "NaN"
+		Add_Subtract_Field.text = "0"
 		return
 	
 	#grab the user input then convert to an int
@@ -124,7 +129,7 @@ func ADD_OR_SUBTRACT_FROM_FIELD(mode: String):
 	match mode: 
 		"ADD":text += 1 #argument passed by add button
 		"SUBTRACT": text -=1 #argument passed by subtract button
-		_: print("adjust_field_by_one() expected ADD or SUBTRACT,\
+		_: print("ADD_OR_SUBTRACT_FROM_FIELD() expected ADD or SUBTRACT,\
 		 was given '" + mode + "' instead")
 	
 	#change the field's text to match the result
@@ -134,3 +139,13 @@ func wire_button_pressed(newstate: String):
 	BombTimerNode.paused = true
 	PlayPauseButton.disabled = true
 	GlobalScript.change_game_state(newstate)
+
+func openTimerDisplayWindow():
+	if not get_tree().root.has_node("DisplayScreen"):
+		var DisplayScreenWindow = DisplayScreen.instantiate()
+		DisplayScreenWindow.position = get_window().position
+		get_tree().root.add_child(DisplayScreenWindow)
+
+func close_timer_window_button_pressed():
+	GlobalScript.close_display_button_pressed.emit()
+	pass

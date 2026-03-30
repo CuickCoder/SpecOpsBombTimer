@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://wskk5sfavm4s"]
 
-[ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://DisplayScreen.gd" id="1_b4k55"]
-[ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://DisplayWindowScript.gd" id="1_emsd4"]
-[ext_resource type="Texture2D" uid="uid://e7ave82ayvfn" path="res://CautionTape.jpg" id="3_iidtv"]
-[ext_resource type="Shader" uid="uid://cpn1deiusbdab" path="res://CautionTapeShader.gdshader" id="3_tapam"]
-[ext_resource type="Texture2D" uid="uid://dyutvnyp7w11b" path="res://TimerBackgroundBrighter.jpg" id="5_emsd4"]
-[ext_resource type="FontFile" uid="uid://kwhpl84x6f1k" path="res://pcsenior.ttf" id="5_ry1nn"]
+[ext_resource type="Script" uid="uid://c0fw377uqyouf" path="res://Scripts/DisplayScreen.gd" id="1_b4k55"]
+[ext_resource type="Script" uid="uid://d0p24j7f20d1e" path="res://Scripts/DisplayWindowScript.gd" id="1_emsd4"]
+[ext_resource type="Texture2D" uid="uid://e7ave82ayvfn" path="res://Graphics/CautionTape.jpg" id="3_iidtv"]
+[ext_resource type="Shader" uid="uid://cpn1deiusbdab" path="res://Graphics/CautionTapeShader.gdshader" id="3_tapam"]
+[ext_resource type="Texture2D" uid="uid://dyutvnyp7w11b" path="res://Graphics/TimerBackgroundBrighter.jpg" id="5_emsd4"]
+[ext_resource type="FontFile" uid="uid://kwhpl84x6f1k" path="res://Fonts/pcsenior.ttf" id="5_ry1nn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tapam"]
 shader = ExtResource("3_tapam")

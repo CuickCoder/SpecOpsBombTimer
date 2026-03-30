@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cpxmn136xil4g"]
 
-[ext_resource type="Script" uid="uid://bivhgpitfnai1" path="res://control_screen.gd" id="1_ac2m8"]
-[ext_resource type="StyleBox" uid="uid://myaa5xhg1ma6" path="res://PanelLabelStyleBox.tres" id="2_1h5ei"]
-[ext_resource type="Theme" uid="uid://cqm31i3fkfhsn" path="res://ControlScreenTheme.tres" id="2_6sida"]
-[ext_resource type="StyleBox" uid="uid://bqjpmfpg64egn" path="res://YellowButton.tres" id="3_cnqmo"]
-[ext_resource type="StyleBox" uid="uid://diliwhdtqp545" path="res://YellowButtonHover.tres" id="4_utm8f"]
+[ext_resource type="Script" uid="uid://bivhgpitfnai1" path="res://Scripts/control_screen.gd" id="1_rgbwv"]
+[ext_resource type="StyleBox" uid="uid://myaa5xhg1ma6" path="res://Themes/PanelLabelStyleBox.tres" id="2_qx0it"]
+[ext_resource type="Theme" uid="uid://cqm31i3fkfhsn" path="res://Themes/ControlScreenTheme.tres" id="3_6krae"]
+[ext_resource type="StyleBox" uid="uid://bqjpmfpg64egn" path="res://Themes/YellowButton.tres" id="4_3pjqc"]
+[ext_resource type="StyleBox" uid="uid://diliwhdtqp545" path="res://Themes/YellowButtonHover.tres" id="5_wt0qr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac2m8"]
 bg_color = Color(0.68604404, 0.66439795, 0.65705264, 1)
@@ -46,7 +46,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ac2m8")
+script = ExtResource("1_rgbwv")
 BombTimerNode = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/BombTimerNode")
 RawTimerNodeLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/RawTimerLabel")
 FormattedTimerLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/FormattedTimerLabel")
@@ -108,14 +108,14 @@ theme_override_constants/separation = 0
 [node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/TimerVBox" unique_id=920392917]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
+theme_override_styles/normal = ExtResource("2_qx0it")
 text = "Timer"
 horizontal_alignment = 1
 
 [node name="TimerButtonsPanel" type="Panel" parent="UI/All Buttons/TimerVBox" unique_id=535356217]
 custom_minimum_size = Vector2(0, 181.325)
 layout_mode = 2
-theme = ExtResource("2_6sida")
+theme = ExtResource("3_6krae")
 
 [node name="TimeButtonsVbox" type="VBoxContainer" parent="UI/All Buttons/TimerVBox/TimerButtonsPanel" unique_id=966980603]
 layout_mode = 1
@@ -168,14 +168,14 @@ theme_override_constants/separation = 0
 [node name="TimerButtonsPanelLabel" type="Label" parent="UI/All Buttons/TimeAdjustmentVbox" unique_id=570115296]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
+theme_override_styles/normal = ExtResource("2_qx0it")
 text = " Timer Adjustment"
 horizontal_alignment = 1
 
 [node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons/TimeAdjustmentVbox" unique_id=619584387]
 custom_minimum_size = Vector2(0, 203.67)
 layout_mode = 2
-theme = ExtResource("2_6sida")
+theme = ExtResource("3_6krae")
 
 [node name="AdjustMentButtonsVBox" type="VBoxContainer" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel" unique_id=1251126065]
 layout_mode = 1
@@ -199,8 +199,8 @@ alignment = 1
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("3_cnqmo")
-theme_override_styles/hover = ExtResource("4_utm8f")
+theme_override_styles/normal = ExtResource("4_3pjqc")
+theme_override_styles/hover = ExtResource("5_wt0qr")
 text = "-"
 
 [node name="AddSubtractField" type="LineEdit" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow" unique_id=133351785]
@@ -216,15 +216,15 @@ custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3_cnqmo")
-theme_override_styles/hover = ExtResource("4_utm8f")
+theme_override_styles/normal = ExtResource("4_3pjqc")
+theme_override_styles/hover = ExtResource("5_wt0qr")
 text = "+"
 
 [node name="Add Subtract Button" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=1641531714]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("3_cnqmo")
-theme_override_styles/hover = ExtResource("4_utm8f")
+theme_override_styles/normal = ExtResource("4_3pjqc")
+theme_override_styles/hover = ExtResource("5_wt0qr")
 text = "Update Time
 "
 
@@ -257,8 +257,8 @@ horizontal_alignment = 1
 [node name="CustomTimeButton" type="Button" parent="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox" unique_id=443824184]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = ExtResource("3_cnqmo")
-theme_override_styles/hover = ExtResource("4_utm8f")
+theme_override_styles/normal = ExtResource("4_3pjqc")
+theme_override_styles/hover = ExtResource("5_wt0qr")
 text = "Set Custom Time"
 
 [node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=2014391123]
@@ -268,14 +268,14 @@ theme_override_constants/separation = 0
 [node name="WinLosePanelLabel" type="Label" parent="UI/All Buttons/WinLoseVbox" unique_id=110929692]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
+theme_override_styles/normal = ExtResource("2_qx0it")
 text = " Win/Lose Controls "
 horizontal_alignment = 1
 
 [node name="WinLoseButtons" type="Panel" parent="UI/All Buttons/WinLoseVbox" unique_id=676309629]
 custom_minimum_size = Vector2(0, 104.86)
 layout_mode = 2
-theme = ExtResource("2_6sida")
+theme = ExtResource("3_6krae")
 
 [node name="WinLoseVbox" type="VBoxContainer" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons" unique_id=1562807411]
 layout_mode = 1
@@ -314,14 +314,14 @@ theme_override_constants/separation = 0
 [node name="NewWindowPanelLabel" type="Label" parent="UI/All Buttons/NewWindowVbox" unique_id=990554384]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = ExtResource("2_1h5ei")
+theme_override_styles/normal = ExtResource("2_qx0it")
 text = " Timer Window"
 horizontal_alignment = 1
 
 [node name="NewWindowPanel" type="Panel" parent="UI/All Buttons/NewWindowVbox" unique_id=1557543696]
 custom_minimum_size = Vector2(0, 93.84)
 layout_mode = 2
-theme = ExtResource("2_6sida")
+theme = ExtResource("3_6krae")
 
 [node name="PercieIsSexy" type="VBoxContainer" parent="UI/All Buttons/NewWindowVbox/NewWindowPanel" unique_id=451061242]
 layout_mode = 1

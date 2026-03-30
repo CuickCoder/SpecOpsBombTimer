@@ -21,7 +21,7 @@ config/windows_native_icon="res://bomb_face_icon_zoomed.ico"
 
 [autoload]
 
-GlobalScript="*res://GlobalScript.gd"
+GlobalScript="*res://Scripts/GlobalScript.gd"
 
 [display]
 

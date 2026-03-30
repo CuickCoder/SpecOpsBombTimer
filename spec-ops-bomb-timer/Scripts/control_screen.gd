@@ -13,7 +13,7 @@ extends Control
 @export var CorrectWireButton: Button 
 @export var WrongWireButton: Button
 @export var PlayPauseButton: Button
-var DisplayScreen = preload("res://DisplayScreen.tscn")
+var DisplayScreen = preload("res://Scenes/DisplayScreen.tscn")
 var DefaultStartingTime = 3300.00
 
 func _ready() -> void:

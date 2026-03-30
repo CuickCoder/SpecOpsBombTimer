@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://kwhpl84x6f1k"
-path="res://.godot/imported/pcsenior.ttf-1947ae6f064d866f0cc17498fd81b567.fontdata"
+uid="uid://b7xafvoyhvloq"
+path="res://.godot/imported/RADIOLAND.ttf-d9d7dac6fadcb209589f36561b2d7f99.fontdata"
 
 [deps]
 
-source_file="res://pcsenior.ttf"
-dest_files=["res://.godot/imported/pcsenior.ttf-1947ae6f064d866f0cc17498fd81b567.fontdata"]
+source_file="res://Fonts/RADIOLAND.ttf"
+dest_files=["res://.godot/imported/RADIOLAND.ttf-d9d7dac6fadcb209589f36561b2d7f99.fontdata"]
 
 [params]
 

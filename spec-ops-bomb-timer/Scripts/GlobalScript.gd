@@ -6,7 +6,6 @@ extends Node
 var FormattedTimerText = "00:00"
 var BombTimerTimeLeft = 0
 var BombTimerPaused = true
-var timerStartingAmount = 3300 #this is a placeholder
 enum GameState {PLAYING,WIN,LOSE} #PLAYING also used as idle state
 var CurrentGameState = GameState.PLAYING
 signal state_changed(new_state)

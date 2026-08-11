@@ -25,13 +25,6 @@ border_width_bottom = 3
 corner_radius_top_left = 7
 corner_radius_top_right = 7
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sida"]
-bg_color = Color(0, 0.87235683, 0.17893097, 1)
-corner_radius_top_left = 7
-corner_radius_top_right = 7
-corner_radius_bottom_right = 7
-corner_radius_bottom_left = 7
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnqmo"]
 bg_color = Color(0.99999994, 0.04050286, 0.022352692, 1)
 corner_radius_top_left = 7
@@ -39,7 +32,14 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
-[node name="Farts" type="Control" unique_id=2139415027 node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton", "CorrectWireButton", "WrongWireButton", "PlayPauseButton", "CloseTimerButton")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sida"]
+bg_color = Color(0, 0.87235683, 0.17893097, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[node name="Farts" type="Control" unique_id=2139415027 node_paths=PackedStringArray("BombTimerNode", "RawTimerNodeLabel", "FormattedTimerLabel", "Add_Subtract_Field", "CustomTimeFieldMinutes", "CustomTimerFieldSeconds", "ResetTimerButton", "CorrectWireButton", "WrongWireButton", "PlayPauseButton", "CloseTimerButton", "UseArduinoInputCheckbox", "WinLoseBehaviorLabel", "BombConnectionLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,6 +47,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rgbwv")
+BOMB_CONNECTED_COLOR = Color(0.32764837, 0.6875099, 0.8478394, 1)
+BOMB_NOT_CONNECTED_COLOR = Color(1, 0.494251, 0.42709014, 1)
 BombTimerNode = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/BombTimerNode")
 RawTimerNodeLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/RawTimerLabel")
 FormattedTimerLabel = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/FormattedTimerLabel")
@@ -54,10 +56,13 @@ Add_Subtract_Field = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButto
 CustomTimeFieldMinutes = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeMin")
 CustomTimerFieldSeconds = NodePath("UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeRow/CustomTimeSec")
 ResetTimerButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/ResetTimer")
-CorrectWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton")
-WrongWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton")
+CorrectWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer/CorrectWireButton")
+WrongWireButton = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer/WrongWireButton")
 PlayPauseButton = NodePath("UI/All Buttons/TimerVBox/TimerButtonsPanel/TimeButtonsVbox/PlayPauseButton")
 CloseTimerButton = NodePath("UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/CloseTimerWindowButton")
+UseArduinoInputCheckbox = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/ArduinoCheckBox")
+WinLoseBehaviorLabel = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WinLoseBehaviorLabel")
+BombConnectionLabel = NodePath("UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/BombConnectionLabel")
 
 [node name="UI" type="Control" parent="." unique_id=1622509251]
 layout_mode = 1
@@ -87,7 +92,7 @@ offset_right = -19.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 11
 
 [node name="ControlsWindowLabelVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=1357739684]
 layout_mode = 2
@@ -174,7 +179,7 @@ text = " Timer Adjustment"
 horizontal_alignment = 1
 
 [node name="AdjustmentButtonsPanel" type="Panel" parent="UI/All Buttons/TimeAdjustmentVbox" unique_id=619584387]
-custom_minimum_size = Vector2(0, 203.67)
+custom_minimum_size = Vector2(0, 193.105)
 layout_mode = 2
 theme = ExtResource("3_6krae")
 
@@ -274,7 +279,7 @@ text = " Win/Lose Controls "
 horizontal_alignment = 1
 
 [node name="WinLoseButtons" type="Panel" parent="UI/All Buttons/WinLoseVbox" unique_id=676309629]
-custom_minimum_size = Vector2(0, 104.86)
+custom_minimum_size = Vector2(0, 151.265)
 layout_mode = 2
 theme = ExtResource("3_6krae")
 
@@ -289,24 +294,45 @@ offset_right = -183.0
 offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 alignment = 1
 
-[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1119812976]
+[node name="BombConnectionLabel" type="Label" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1174016274]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxFlat_6sida")
-text = "WIN
-"
+theme_override_colors/font_color = Color(0.59997064, 0.73147446, 1, 1)
+text = "BombConnectionLabel"
+horizontal_alignment = 1
 
-[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1682964664]
+[node name="ArduinoCheckBox" type="CheckBox" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1395171146]
 layout_mode = 2
+size_flags_horizontal = 4
+button_pressed = true
+text = "Use Actual Wire Cut"
+
+[node name="WinLoseBehaviorLabel" type="Label" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=1447867054]
+layout_mode = 2
+text = "WinLoseBehaviorLabel"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox" unique_id=717995744]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WrongWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer" unique_id=1682964664]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_cnqmo")
-text = "LOSE
-"
+text = "     LOSE     "
+
+[node name="CorrectWireButton" type="Button" parent="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer" unique_id=1119812976]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxFlat_6sida")
+text = "    WIN    "
 
 [node name="NewWindowVbox" type="VBoxContainer" parent="UI/All Buttons" unique_id=862937637]
 layout_mode = 2
@@ -355,7 +381,7 @@ text = "   X   "
 [connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/AddSubtractRow/AddButton" to="." method="ADD_OR_SUBTRACT_FROM_FIELD" binds= ["ADD"]]
 [connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/Add Subtract Button" to="." method="adjust_timer" binds= ["ADDSUBTRACT"]]
 [connection signal="pressed" from="UI/All Buttons/TimeAdjustmentVbox/AdjustmentButtonsPanel/AdjustMentButtonsVBox/CustomTimeButton" to="." method="adjust_timer" binds= ["CUSTOMTIME"]]
-[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
-[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer/WrongWireButton" to="." method="wire_button_pressed" binds= ["LOSE"]]
+[connection signal="pressed" from="UI/All Buttons/WinLoseVbox/WinLoseButtons/WinLoseVbox/HBoxContainer/CorrectWireButton" to="." method="wire_button_pressed" binds= ["WIN"]]
 [connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/OpenWindowButton" to="." method="openTimerDisplayWindow"]
 [connection signal="pressed" from="UI/All Buttons/NewWindowVbox/NewWindowPanel/Timer Control VBox/CloseTimerWindowButton" to="." method="close_timer_window_button_pressed"]

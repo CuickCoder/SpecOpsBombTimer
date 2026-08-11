@@ -1,7 +1,11 @@
 extends Control
-#This script is for defining what each of the buttons on the control screen 
-#does, and changes the timer according to user input. In a future update, 
-#it will also give you compliments
+# This script handles the control-screen buttons, updates the timer based on
+# user input, and controls which actions are available based on the game state
+# and the bridge/Arduino connection state. In a future update, it will also
+# give you compliments.
+
+@export var BOMB_CONNECTED_COLOR: Color
+@export var BOMB_NOT_CONNECTED_COLOR: Color
 
 @export var BombTimerNode: Timer 
 @export var RawTimerNodeLabel: Label 
@@ -14,11 +18,18 @@ extends Control
 @export var WrongWireButton: Button
 @export var PlayPauseButton: Button
 @export var CloseTimerButton: Button
+@export var UseArduinoInputCheckbox : CheckBox
+@export var WinLoseBehaviorLabel : Label
+@export var BombConnectionLabel: Label
+
 var DisplayScreen = preload("res://Scenes/DisplayScreen.tscn")
 var DefaultStartingTime = 3300.00
+var physcial_wire_already_detected = false
 
 func _ready() -> void:
 	#setup the timer
+	print("hello from control_screen.gd ready()")
+	ArduinoScript.arduino_message_received.connect(_on_arduino_message)
 	BombTimerNode.start(DefaultStartingTime)
 	BombTimerNode.paused = true
 	#Update Global Script
@@ -27,8 +38,36 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#Update the text on screen to show how much time is on timer
 	RawTimerNodeLabel.text = str(BombTimerNode.time_left)
-	FormattedTimerLabel.text = convert_timer_to_MMSS(BombTimerNode.time_left)
+	FormattedTimerLabel.text = convert_timer_to_MMSS_string(BombTimerNode.time_left)
 	
+	#ALL ARDUINO RELATED STUFF --------------------------
+	#Disable the USB input checkbox if ArduinoScript's ConnectionState is not USB_READY
+	if ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_DISCONNECTED:
+		UseArduinoInputCheckbox.disabled = true
+	else: 
+		UseArduinoInputCheckbox.disabled = false
+	
+	#update the connection status message from the Arduino Script to show on control screen
+	BombConnectionLabel.text = ArduinoScript.connection_message
+	if ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY: 
+		BombConnectionLabel.add_theme_color_override("font_color", BOMB_CONNECTED_COLOR)
+	else: 
+		BombConnectionLabel.add_theme_color_override("font_color", BOMB_NOT_CONNECTED_COLOR)
+
+	#tell the user what mode is active
+	if physcial_wire_already_detected: 
+			WinLoseBehaviorLabel.text = "MANUAL MODE"
+			WinLoseBehaviorLabel.add_theme_color_override("font_color", BOMB_NOT_CONNECTED_COLOR)
+	elif UseArduinoInputCheckbox.button_pressed \
+		and ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY :
+		WinLoseBehaviorLabel.text = "AUTO MODE"
+		WinLoseBehaviorLabel.add_theme_color_override("font_color", BOMB_CONNECTED_COLOR)
+	else: 
+		WinLoseBehaviorLabel.text = "MANUAL MODE"
+		WinLoseBehaviorLabel.add_theme_color_override("font_color", BOMB_NOT_CONNECTED_COLOR)
+
+	#-----------------------------------------------------
+
 	#Don't allow the timer reset or close window buttons to
 	#be pressed if timer is running
 	if BombTimerNode.paused or BombTimerNode.time_left == 0.0: 
@@ -46,6 +85,9 @@ func updateGlobalScript():
 	GlobalScript.BombTimerPaused = BombTimerNode.paused
 
 func Play_or_Pause_timer():
+	#return to the playing state in case a WIN or LOSE state was accidentally triggered
+	GlobalScript.change_game_state("PLAYING")
+
 	#is_stoppped returns true if timer hasn't been started yet
 	if BombTimerNode.is_stopped():
 		BombTimerNode.start()
@@ -59,13 +101,17 @@ func reset_timer():
 		#godot timers can't have any seconds unless it was started or has been paused
 		BombTimerNode.start(DefaultStartingTime)
 		BombTimerNode.paused = true
+		
 		#Reset the game state!
 		GlobalScript.change_game_state("PLAYING")
 		CorrectWireButton.disabled = false 
 		WrongWireButton.disabled = false
 		PlayPauseButton.disabled = false
+		
+		#make arduino_input usable again
+		physcial_wire_already_detected = false
 
-func convert_timer_to_MMSS(time_left: float) -> String:
+func convert_timer_to_MMSS_string(time_left: float) -> String:
 	var total_seconds := int(time_left)
 	var minutes := total_seconds / 60
 	var seconds := total_seconds % 60
@@ -137,8 +183,22 @@ func ADD_OR_SUBTRACT_FROM_FIELD(mode: String):
 
 func wire_button_pressed(newstate: String):
 	BombTimerNode.paused = true
-	PlayPauseButton.disabled = true
+	#PlayPauseButton.disabled = true
 	GlobalScript.change_game_state(newstate)
+
+func _on_arduino_message(message: String) -> void:
+	#this is called when ArduinoScript emits a message received from the Arduino
+
+	#Only activate Win/Lose if the USB is connected, we haven't already cut a wire, 
+	#and if the checkbox is checked
+	if UseArduinoInputCheckbox.button_pressed and not physcial_wire_already_detected \
+	and ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY:
+		if message.begins_with("GOOD_WIRE"):
+			physcial_wire_already_detected = true
+			wire_button_pressed("WIN")
+		elif message.begins_with("BAD_WIRE"):
+			physcial_wire_already_detected = true
+			wire_button_pressed("LOSE")
 
 func openTimerDisplayWindow():
 	if not get_tree().root.has_node("DisplayScreen"):

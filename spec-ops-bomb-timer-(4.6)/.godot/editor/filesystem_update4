@@ -1,0 +1,6 @@
+res://ControlScreen.tscn
+res://ControlScreenTheme.tres
+res://GlobalScript.gd
+res://DisplayScreen.tscn
+res://control_screen.gd
+res://DisplayScreen.gd

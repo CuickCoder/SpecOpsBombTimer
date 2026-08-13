@@ -16,6 +16,15 @@ except ImportError:
     input("Press Enter to close...")
     raise SystemExit(1)
 
+ASCII_LOGO = r"""
+
+████   ███   ███  █   █     ███   ███  █   █ █   █ █████  ███  █████ ███  ███  █   █    ████  ████   ███   ███  ████   ███  █   █ 
+█   █ █   █ █   █ ██ ██    █     █   █ ██  █ ██  █ █     █       █    █  █   █ ██  █    █   █ █   █ █   █ █     █   █ █   █ ██ ██ 
+████  █   █ █   █ █ █ █    █     █   █ █ █ █ █ █ █ ████  █       █    █  █   █ █ █ █    ████  ████  █   █ █  ██ ████  █████ █ █ █ 
+█  █  █   █ █   █ █   █    █     █   █ █  ██ █  ██ █     █       █    █  █   █ █  ██    █     █  █  █   █ █   █ █  █  █   █ █   █ 
+█   █  ███   ███  █   █     ███   ███  █   █ █   █ █████  ███    █   ███  ███  █   █    █     █   █  ███   ███  █   █ █   █ █   █ 
+"""
+
 DEFAULT_BAUD_RATE = 9600
 GODOT_ADDRESS = ("127.0.0.1", 4242)
 STATUS_UPDATE_INTERVAL = 1.0
@@ -30,7 +39,9 @@ def update_console(message: str = "") -> None:
 
     #clear the terminal and move the cursor back to its top-left corner
     print("\033[2J\033[H", end="")
-    print("GodotSerialBridge")
+    print(ASCII_LOGO)
+   # print("Room Connection Program!")
+    print("You need this program running, otherwise this computer can't connect to the escape room!")
     print("=================")
     print(f"Godot UDP: {GODOT_ADDRESS[0]}:{GODOT_ADDRESS[1]}")
     print(f"Baud rate: {DEFAULT_BAUD_RATE}")

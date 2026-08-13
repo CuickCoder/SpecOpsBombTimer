@@ -92,8 +92,8 @@ func update_connection_state() -> void:
 		#...but the arduino timed out
 		else: 
 			CurrentConnectionState = ConnectionState.USB_DISCONNECTED
-			connection_message = "Bridge Program running, USB disconnected"
+			connection_message = "Room Connection Program running, USB disconnected"
 	#but if the udp_listener has timed out...
 	else: 
 		CurrentConnectionState = ConnectionState.USB_DISCONNECTED
-		connection_message = "Bridge Program Not running"
+		connection_message = "Room Connection Program Not running"

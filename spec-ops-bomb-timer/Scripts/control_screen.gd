@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 
 	#tell the user what mode is active
 	if physcial_wire_already_detected: 
-			WinLoseBehaviorLabel.text = "MANUAL MODE"
+			WinLoseBehaviorLabel.text = "MANUAL MODE: reset timer & replace wire to enable AUTO MODE"
 			WinLoseBehaviorLabel.add_theme_color_override("font_color", BOMB_NOT_CONNECTED_COLOR)
 	elif UseArduinoInputCheckbox.button_pressed \
 		and ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY :

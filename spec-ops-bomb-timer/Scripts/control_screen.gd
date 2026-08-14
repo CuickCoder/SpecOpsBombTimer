@@ -25,6 +25,7 @@ extends Control
 var DisplayScreen = preload("res://Scenes/DisplayScreen.tscn")
 var DefaultStartingTime = 3300.00
 var physcial_wire_already_detected = false
+var game_is_active = false
 
 func _ready() -> void:
 	#setup the timer
@@ -56,7 +57,7 @@ func _process(delta: float) -> void:
 
 	#tell the user what mode is active
 	if physcial_wire_already_detected: 
-			WinLoseBehaviorLabel.text = "MANUAL MODE: reset timer & replace wire to enable AUTO MODE"
+			WinLoseBehaviorLabel.text = "MANUAL MODE: Wire was cut/disconnected; reset timer to enable AUTO MODE"
 			WinLoseBehaviorLabel.add_theme_color_override("font_color", BOMB_NOT_CONNECTED_COLOR)
 	elif UseArduinoInputCheckbox.button_pressed \
 		and ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY :
@@ -95,6 +96,15 @@ func Play_or_Pause_timer():
 		#toggle the bool "paused" if timer has already been started
 		BombTimerNode.paused = not BombTimerNode.paused
 
+	if not BombTimerNode.paused:
+		#"game is active" tells us that the timer was started, and hasn't been reset yet.
+		#currently its only use is to prevent wire input from being used before the GM has 
+		#pressed play. In the future it would be wiser to instead have a "PLAYING" and a 
+		#"STANDBY" state instead of this variable but I don't feel like reworking the 
+		#state machine right now.
+		game_is_active = true
+
+
 func reset_timer():
 	#so the user can't accidentally restart a timer during a game
 	if BombTimerNode.is_stopped() or BombTimerNode.paused:
@@ -110,6 +120,7 @@ func reset_timer():
 		
 		#make arduino_input usable again
 		physcial_wire_already_detected = false
+		game_is_active = false
 
 func convert_timer_to_MMSS_string(time_left: float) -> String:
 	var total_seconds := int(time_left)
@@ -191,7 +202,8 @@ func _on_arduino_message(message: String) -> void:
 
 	#Only activate Win/Lose if the USB is connected, we haven't already cut a wire, 
 	#and if the checkbox is checked
-	if UseArduinoInputCheckbox.button_pressed and not physcial_wire_already_detected \
+	if game_is_active and not BombTimerNode.paused \
+	and UseArduinoInputCheckbox.button_pressed and not physcial_wire_already_detected \
 	and ArduinoScript.CurrentConnectionState == ArduinoScript.ConnectionState.USB_READY:
 		if message.begins_with("GOOD_WIRE"):
 			physcial_wire_already_detected = true
